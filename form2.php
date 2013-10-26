@@ -1,0 +1,9 @@
+	<input type="hidden" name="nombre_c2" value="<?php echo $nombre_c2 ?>" />
+	<input type="hidden" name="direccion_c2" value="<?php echo $direccion2 ?>" />
+	<input type="hidden" name="telefono_c2" value="<?php echo $telefono2 ?>" />
+	<input type="hidden" name="celular_c2" value="<?php echo $celular2 ?>" />
+	<input type="hidden" name="nombre_a2" value="<?php echo $nombre_a2 ?>" />
+	<input type="hidden" name="cantidad2" value="<?php echo $cantidad2 ?>" />
+	<input type="hidden" name="fecha2" value="<?php echo $fecha2 ?>" />
+	<input type="hidden" name="tipo_actividad2" value="<?php echo $tipo_actividad2 ?>" />
+	<input type="hidden" name="descripcion2" value="<?php echo $descripcion2 ?>" />

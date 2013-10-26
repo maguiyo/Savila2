@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+		<meta charset="utf-8">
+		<title>Menu</title>
+		<link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+		<link href="iconic.css" media="screen" rel="stylesheet" type="text/css" />
+		<script src="prefix-free.js"></script>
+	</head>
+
+<body>
+	<div class="wrap">
+	
+	
+	<nav>
+		<ul class="menu">
+			<li><a href="#">Inicio</a></li>
+			<li><a href="#">Contactos</a>
+				<ul>
+					<li><a href="creacion_contacto.php">Creaci&oacute;n de Contactos</a></li>
+					<li><a href="consulta_contactos.php">Consulta de Contactos</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Art&iacute;culos</a>
+				<ul>
+					<li><a href="creacion_articulo.php">Creacion de Art&iacute;culos </a></li>
+					<li><a href="consulta_articulos.php">Consulta de Art&iacute;culos</a></li>
+				</ul>
+			</li>
+			<li><a href="#"> Ventas</a>
+				<ul>
+					<li><a href="creacion_venta.php">Registro de Ventas</a></li>
+					<li><a href="consulta_ventas.php">Consulta de Ventas</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Reportes</a>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+	</nav>
+	</div>
+
+	<div class="wrap">
+	<script>
+		$(document).ready(function() {
+			
+			
+			
+			// SUCCESS AJAX CALL, replace "success: false," by:     success : function() { callSuccessFunction() }, 
+			$("#form1").validationEngine({
+				ajaxSubmit: true,
+					ajaxSubmitFile: "consulta_articulos.php",
+					ajaxSubmitMessage: "Gracias, te estaremos contactando pronto!",
+				success :  false,
+				failure : function() {}
+			})
+			
+
+		
+		});
+		</script>
+	</div>
+	
+
+</body>
+
+</html>
