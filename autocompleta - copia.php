@@ -2,6 +2,9 @@
 <script language="JavaScript" src="js/jquery-ui-1.8.13.custom.min.js"></script>
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
 
+
+
+
 <?php
 include("conexion.php");//se incluyen los datos para realizar la conexion a su base de datos
 
