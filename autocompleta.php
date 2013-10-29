@@ -24,7 +24,7 @@ $arregloC= implode(", ", $elementosC);//junta los valores del array en una sola 
 		
 		var availableTags=new Array(<?php echo $arregloC; ?>);//imprime el arreglo dentro de un array de javascript
 				
-		$( "#tagsC" ).autocomplete({
+		$( ".tagsC" ).autocomplete({
 			source: availableTags
 		});
 	});
@@ -51,7 +51,7 @@ $arregloA= implode(", ", $elementosA);//junta los valores del array en una sola 
 		
 		var availableTags=new Array(<?php echo $arregloA; ?>);//imprime el arreglo dentro de un array de javascript
 				
-		$( "#tagsA" ).autocomplete({
+		$( ".tagsA" ).autocomplete({
 			source: availableTags
 		});
 	});
@@ -65,53 +65,6 @@ $conC2 = "select * from contactos where activo = 1";//consulta para seleccionar 
 $queryC2 = mysql_query($conC2);
 
 	?>
-    
-    <script>
-	$(function() {
-		
-		<?php
-		
-		while($row= mysql_fetch_array($queryC2)) {//se reciben los valores y se almacenan en un arreglo
-      $elementosC2[]= '"'.$row['nombre'].'"';
-	  
-}
-$arregloC2= implode(", ", $elementosC2);//junta los valores del array en una sola cadena de texto
-		?>	
-		
-		var availableTags=new Array(<?php echo $arregloC2; ?>);//imprime el arreglo dentro de un array de javascript
-				
-		$( "#tagsC2" ).autocomplete({
-			source: availableTags
-		});
-	});
-	</script>
-
-	<?php
-
-$conA2 = "select * from articulos where activo = 1";//consulta para seleccionar las palabras a buscar, esto va a depender de su base de datos
-$queryA2 = mysql_query($conA2);
-
-	?>
-    
-    <script>
-	$(function() {
-		
-		<?php
-		
-		while($row= mysql_fetch_array($queryA2)) {//se reciben los valores y se almacenan en un arreglo
-      $elementosA2[]= '"'.$row['nombre'].'"';
-	  
-}
-$arregloA2= implode(", ", $elementosA2);//junta los valores del array en una sola cadena de texto
-		?>	
-		
-		var availableTags=new Array(<?php echo $arregloA2; ?>);//imprime el arreglo dentro de un array de javascript
-				
-		$( "#tagsA2" ).autocomplete({
-			source: availableTags
-		});
-	});
-	</script>
 	
 	
 	

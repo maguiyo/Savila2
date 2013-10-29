@@ -8,24 +8,34 @@
 	
 		if(isset($_GET['nombre']))
 			$nombre = $_GET['nombre'];
-	else
-		$nombre = "";
+		else
+			$nombre = "";
+		
+		if(isset($_GET['p']))
+			$p = $_GET['p'];
+		else
+			$p = "";
+		
+		if(isset($_SESSION['autentica']))
+			$autentica = $_SESSION['autentica'];
+		else
+			$autentica = "nop";
 	
 	
 	//Define el tipo de informe seleccionado en el menú
-	if(isset($_GET['p']) and ($_SESSION["autentica"] == "SIP") )
+	if(isset($_GET['p']) and ($autentica == "SIP") )
 			$informe = $_GET['p'];
 	else
 		$informe = "login";
 	
-	$p = $_GET['p'];
+	
 	
 	
 	echo $informe;
 	echo "-";
 	echo $p;
 	echo "autentica : ";
-	echo $_SESSION["autentica"];
+	echo $autentica;
 	echo " ------    ";
 	echo $_SESSION["usuarioactual"];
 	echo "ROL";
@@ -55,22 +65,11 @@
   
 	<!-- Included CSS Files -->
 	<link rel="stylesheet" href="stylesheets/foundation.css">
-	<link rel="stylesheet" href="stylesheets/app.css">
-	<link rel="stylesheet" href="stylesheets/grid.css">
-	<link rel="stylesheet" href="stylesheets/ui.css">
-	<link rel="stylesheet" href="stylesheets/forms.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 	<!--[if lt IE 9]>
 		<link rel="stylesheet" href="stylesheets/ie.css">
 	<![endif]-->
-
-	<?php if($ie_fix){ ?>
-	<!-- IE Fix for HTML5 Tags -->
-	<!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<?php } ?>
-	<script src="javascripts/apps.js"></script>
 
 </head>
 <body>
@@ -243,11 +242,6 @@
 	<!-- container -->
 
 	<!-- Included JS Files -->
-	<script src="javascripts/jquery.min.js"></script>
-	<script src="javascripts/jquery_extra_selectors.js"></script>
-	<script src="javascripts/modernizr.foundation.js"></script>
-	<script src="javascripts/foundation.js"></script>
-	<script src="javascripts/app.js"></script>
 
 </body>
 </html>

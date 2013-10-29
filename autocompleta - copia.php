@@ -1,6 +1,4 @@
-<script language="JavaScript" src="js/jquery-1.5.1.min.js"></script>
-<script language="JavaScript" src="js/jquery-ui-1.8.13.custom.min.js"></script>
-<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
+
 
 
 

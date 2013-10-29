@@ -1,33 +1,35 @@
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
 <script>
+var id_combo=3;
+function insertar_combo(){
+	combo="<div id='"+id_combo+"'><SELECT id='Registro"+id_combo+"' NAME='TipoRegistro"+id_combo+"'><OPTION SELECTED VALUE=0> Escoga un Tipo Registro </option><OPTION VALUE=1> Registrar Venta </option><OPTION VALUE=2> Registrar Actividad </option></select> <div id='divReg"+id_combo+"'></div></div>";
+	
+	$("#allRegistro").append(combo);
+	
+	$("#Registro"+id_combo).attr("onChange","cargar_registro($(this).attr('id'),$(this).next().attr('id'), $(this).parent().attr('id'));");
+	
+	id_combo=id_combo+1;
+	
+};
 
-
-
-$(document).ready(function(){
-  $("#Registro1").change(function(){
-		$.ajax({
-                data:  {"Registro1":$("#Registro1").val()},
+function cargar_registro(registro_id, divReg_id, id_total){
+	$.ajax({
+                data:  {
+							"Registro1"	:$("#"+registro_id).val(),
+							"divReg_id"	:divReg_id,
+							"id_total"	:id_total
+						},
                 url:   'registro1.php',
                 type:  'post',
                 success:  function (response) {
-                        $("#divReg1").html(response);
+                        $("#"+divReg_id).html(response);
                 }
         });
-	
+};
+
+$(document).ready(function(){
+  $("#Registro1").change(function(){
+		
   });
-  $("#Registro2").change(function(){
-		$.ajax({
-                data:  {"Registro2":$("#Registro2").val()},
-                url:   'registro2.php',
-                type:  'post',
-                success:  function (response) {
-                        $("#divReg2").html(response);
-                }
-        });
-	
-  });
-  
 });
 </script>
 
@@ -98,49 +100,46 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
 	<br>
 	<div class="row">  
 	<br>
-	<form method="post" action="index.php?p=creacion_venta" >
-	<SELECT id="Registro1" NAME="TipoRegistro1"> 
-	<OPTION SELECTED VALUE=0> Escoga un Tipo Registro </option>
-	<OPTION VALUE=1> Registrar Venta </option>
-	<OPTION VALUE=2> Registrar Actividad </option>  
-	</SELECT>
 	
-	<input type="hidden" name="TipoRegistro2" value="<?php echo $TipoRegistro2 ?>" />	
-		
-	 <?php //LOS VALORES DE LOS DEMAS DIVS  
-	 include("form2.php");
-	 include("form1.php");
-	 ?>
-	
-
-	
-	</form>
-	</div>
-	
-	<div id="divReg1"> 
-	</div>
-	
-	<br>
-	<div class="row">  
-	<br>
-	<form method="post" action="index.php?p=creacion_venta" >
-	<SELECT id="Registro2" NAME="TipoRegistro2"> 
-	<OPTION SELECTED VALUE=0> Escoga un Tipo Registro </option>
-	<OPTION VALUE=1> Registrar Venta </option>
-	<OPTION VALUE=2> Registrar Actividad </option>  
-	</SELECT>
-	<input type="hidden" name="TipoRegistro1" value="<?php echo $TipoRegistro1 ?>" />
-	
-	<?php //LOS VALORES DE LOS DEMAS DIVS  
-		 include("form1.php");
-		 include("form2.php");
-		 ?>
-	</form>
-	
-	<div id="divReg2"> 
-
 	</div>
 
+	
+    <div id="allRegistro">
+		<div id="0">
+            <SELECT id="Registro0" NAME="TipoRegistro0" onChange="cargar_registro($(this).attr('id'),$(this).next().attr('id'), $(this).parent().attr('id'));"> 
+                <OPTION SELECTED VALUE=0> Escoga un Tipo Registro </option>
+                <OPTION VALUE=1> Registrar Venta </option>
+                <OPTION VALUE=2> Registrar Actividad </option>  
+            </SELECT>
+            <div id="divReg0">
+            	
+            </div>
+    	</div>
+        
+        <div id="1">
+            <SELECT id="Registro1" NAME="TipoRegistro1" onChange="cargar_registro($(this).attr('id'),$(this).next().attr('id'), $(this).parent().attr('id'));" > 
+                <OPTION SELECTED VALUE=0> Escoga un Tipo Registro </option>
+                <OPTION VALUE=1> Registrar Venta </option>
+                <OPTION VALUE=2> Registrar Actividad </option>  
+            </SELECT>	
+            <div id="divReg1">
+                        
+            </div>
+        </div>
+
+        <div id="2">
+            <SELECT id="Registro2" NAME="TipoRegistro2" onChange="cargar_registro($(this).attr('id'),$(this).next().attr('id'), $(this).parent().attr('id'));"> 
+                <OPTION SELECTED VALUE=0> Escoga un Tipo Registro </option>
+                <OPTION VALUE=1> Registrar Venta </option>
+                <OPTION VALUE=2> Registrar Actividad </option>  
+            </SELECT>
+            <div id="divReg2">
+                        
+            </div>
+        </div>
+
+    </div>
+	<button id="addRegistro" nombre="addRegistro" value="Nuevo Registro" onClick="insertar_combo()">Nuevo Registro</button>
 	<?php
 	
 	$nuevafecha = date('Y-m-d', strtotime($fecha));
