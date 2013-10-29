@@ -5,8 +5,8 @@
 	
 // hacemos la consulta de registros
 
-$filtro_nombre = getParam($_GET["filtro_nombre"], "");
-$filtro_fecha = getParam($_GET["filtro_fecha"], "");
+$filtro_nombre = getParam($_POST["filtro_nombre"], "");
+$filtro_fecha = getParam($_POST["filtro_fecha"], "");
 
 
 
@@ -65,9 +65,9 @@ jQuery(function($){
 
 
 Buscar Contactos
-<form method="get" action="consulta_ventas_dos.php?p=consulta_contactos">
+<form method="post" action="index.php?p=consulta_ventas">
     <strong>Nombre</strong>
-	<input type="hidden" name="p" value ="consulta_contactos" />
+	<input type="hidden" name="p" value ="consulta_ventas" />
     <input type="text" name="filtro_nombre" />
     <strong>Fecha</strong>
     <input type="text"  id="datepicker" readonly="readonly" size="12" name="filtro_fecha"/>
@@ -120,12 +120,12 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
 <table cellpadding="0" cellspacing="0" border="0" id="table" class="sortable">
 	<thead>
 	<tr>
-    <th class="asc"><h3>Nombre_c</h3></th>
-    <th class="head"><h3>Direccion_c</h3></th>
-	<th class="head"><h3>Telefono_c</h3></th> 
-	<th class="head"><h3>Nombre_a</h3></th>   	
-	<th class="head"><h3>cantidad</h3></th>
-	<th class="head"><h3>fecha</h3></th>
+    <th class="asc"><h3>Contacto</h3></th>
+    <th class="head"><h3>Direccion</h3></th>
+	<th class="head"><h3>Telefono</h3></th> 
+	<th class="head"><h3>Articulo</h3></th>   	
+	<th class="head"><h3>Cantidad</h3></th>
+	<th class="head"><h3>Fecha</h3></th>
   </tr>
    <tr></tr>
    </thead>
@@ -166,9 +166,10 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
 	</div>
     <form method="post" action="pruebaexcel.php">
     
-    <input type="hidden" name="filtro" value="<?php echo $filtro; ?>" />
+    <input type="hidden" name="filtro_nombre" value="<?php echo $filtro_nombre; ?>" />
+	<input type="hidden" name="filtro_fecha" value="<?php echo $filtro_fecha; ?>" />
 
-	<button type="submit" >Guardar Consulta</button>
+	<button type="submit" >Exportar Excel</button>
 </form>
 
 	<script type="text/javascript" src="script.js"></script>

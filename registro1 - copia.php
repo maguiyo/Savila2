@@ -33,40 +33,6 @@ function registrar_venta<?php echo $id_total ?>(id_form){
 		
 };
 </script>
-<script type="text/javascript">
-jQuery(function($){
-	$.datepicker.regional['es'] = {
-		closeText: 'Cerrar',
-		prevText: '&#x3c;Ant',
-		nextText: 'Sig&#x3e;',
-		currentText: 'Hoy',
-		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
-		'Jul','Ago','Sep','Oct','Nov','Dic'],
-		dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
-		dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
-		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
-		weekHeader: 'Sm',
-		dateFormat: 'yy-mm-dd',
-		firstDay: 1,
-		isRTL: false,
-		showMonthAfterYear: false,
-		yearSuffix: ''};
-	$.datepicker.setDefaults($.datepicker.regional['es']);
-});    
-
-        $(document).ready(function() {
-			$(".datepicker").datepicker({
-			showOn: 'both',
-			buttonImage: 'images/calendar.png',
-			buttonImageOnly: true,
-			changeYear: true,
-			numberOfMonths: 2
-		    })
-			});
-    </script>
-
 <?php
 
 	
@@ -108,7 +74,7 @@ jQuery(function($){
         <strong>Celular:</strong> <input type = 'text' class="nobord" name='celular_c1' size='30'   readonly="readonly" value="<?php echo $celular1 ?>">  
         <strong>Art&iacuteculo: </strong>  <input id="tagsA<?php echo $id_total ?>" class="tagsA" name="nombre_a1" value="<?php echo $nombre_a1 ?>"> 
        <strong> Cantidad: </strong>  <input type = 'text' name='cantidad1' size='10' value="<?php echo $cantidad1 ?>"> 
-        <strong>Fecha : </strong> <input type="text"  class="datepicker" name="fecha1" value="<?php echo $fecha1 ?>"> 
+        <strong>Fecha (formato dia-mes-a&ntilde;o): </strong> <input type="text" name="fecha1" value="<?php echo $fecha1 ?>"> 
         <input id="registrar_venta<?php echo $id_total ?>" name="Registrar" type="submit"  value="Registrar"  onclick="registrar_venta<?php echo $id_total ?>($(this).parent().attr('id'))"/>
 	</div>
 	</div>
@@ -144,7 +110,7 @@ jQuery(function($){
 		</SELECT>
 	
     <strong> Descripcion: </strong>  <textarea id="descripcion" name="descripcion1" rows="5" cols="50"></textarea>
-	<strong> Fecha: </strong> <input type="text" class="datepicker" name="fecha1" value="<?php echo $fecha1 ?>"> 
+	<strong> Fecha (formato dia-mes-a&ntilde;o): </strong> <input type="text" name="fecha1" />
     <input name="Registrar" type="submit"  value="Registrar" />
 	</form>
 	</div>

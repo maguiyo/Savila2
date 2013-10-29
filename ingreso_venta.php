@@ -42,6 +42,10 @@
 	VALUES ('$_POST[nombre_c1]','$_POST[direccion_c1]','$_POST[telefono_c1]','$_POST[celular_c1]','$_POST[nombre_a1]','$_POST[cantidad1]','$nuevafecha1','$vendedor')";
 	
 	$result= mysql_query($sql);
+	
+	$update="UPDATE contactos SET ultimo_contacto = curdate() WHERE nombre like '$_POST[nombre_c1]'";
+	
+	$result= mysql_query($update);
 	mysql_close();
 	
 	?>

@@ -22,7 +22,7 @@ if ($filtro_vendedor == null)  {
 }
 
 
-$query = "SELECT * FROM venta where nombre_c like '%".$filtro_nombre."%' and  fecha like '%".$filtro_fecha."%' and  vendedor like '%".$filtro_vendedor."%'  ORDER BY nombre_c ASC";
+$query = "SELECT * FROM actividades where nombre_c like '%".$filtro_nombre."%' and  fecha like '%".$filtro_fecha."%' and  vendedor like '%".$filtro_vendedor."%'  ORDER BY nombre_c ASC";
 
 $queEmp = mysql_query($query, $conexion);
 ?>
@@ -75,8 +75,8 @@ jQuery(function($){
 
 
 Buscar Contactos
-<form method="post" action="index.php?p=consulta_ventas">
-	<input type="hidden" name="p" value ="consulta_ventas" />
+<form method="post" action="index.php?p=consulta_actividades">
+	<input type="hidden" name="p" value ="consulta_actividades" />
     <strong>Nombre</strong>
     <input type="text" name="filtro_nombre" />
 	<strong>Operador</strong>
@@ -136,8 +136,8 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
     <th class="head"><h3>Direccion</h3></th>
 	<th class="head"><h3>Telefono</h3></th> 
 	<th class="head"><h3>Celular</h3></th> 
-	<th class="head"><h3>Articulo</h3></th>   	
-	<th class="head"><h3>Cantidad</h3></th>
+	<th class="head"><h3>Tipo Actividad</h3></th>   	
+	<th class="head"><h3>Descripcion</h3></th>
 	<th class="head"><h3>Vendedor</h3></th>
 	<th class="head"><h3>Fecha</h3></th>
   </tr>
@@ -150,8 +150,30 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
     <td class=""><?php echo $result['direccion_c']; ?></td>
 	<td class=""><?php echo $result['telefono_c']; ?></td>
 	<td class=""><?php echo $result['celular_c']; ?></td>
-	<td class=""><?php echo $result['nombre_a']; ?></td>
-	<td class=""><?php echo $result['cantidad']; ?></td>
+	<?php
+	if ($result['tipo_actividad'] == 1 ) 
+	{
+			?> <td class=""><?php echo "No se pudo contactar con el usuario" ?></td>
+	<?php		
+	}
+	if ($result['tipo_actividad'] == 2 )
+	{
+			?> <td class=""><?php echo "El usuario contesto pero no estuvo interesado en la compra"; ?></td>
+	<?php		
+	}
+	if ($result['tipo_actividad'] == 3 )
+	{
+			?> <td class=""><?php echo "El usuario contesto y estuvo interesado en la compra"; ?></td>
+	<?php		
+	}
+	if ($result['tipo_actividad'] == 4 )
+	{
+			?> <td class=""><?php echo "Otras razones"; ?></td>
+	<?php		
+	}
+
+	?>
+	<td class=""><?php echo $result['descripcion']; ?></td>
 	<td class=""><?php echo $result['vendedor']; ?></td>
 	<td class=""><?php echo $result['fecha']; ?></td>
     
@@ -180,8 +202,8 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
        
 
 	</div>
-    <form method="post" action="excel_ventas.php">
-   
+    <form method="post" action="excel_actividades.php">
+ 
     <input type="hidden" name="filtro_nombre" value="<?php echo $filtro_nombre; ?>" />
 	<input type="hidden" name="filtro_fecha" value="<?php echo $filtro_fecha; ?>" />
 	<input type="hidden" name="filtro_vendedor" value="<?php echo $filtro_vendedor; ?>" />

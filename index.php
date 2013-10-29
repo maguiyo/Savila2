@@ -88,7 +88,7 @@
 				<a href="index.php?p=login" class=" small radius <?php if($informe == "login"){ ?>green<?php }else{ ?>blue<?php } ?> button">Inicio</a>
 				<?php  if ($rol=='1' or $rol=='2' or $rol=='3'){?><a href="index.php?p=consulta_contactos" class=" small radius <?php if($informe == "consulta_contactos" || $_GET['p'] == "consulta_contactos"){ ?>green<?php }else{ ?>blue<?php } ?> button">Contactos</a><?php } ?> 
 				<?php  if ($rol=='1' or $rol=='2' or $rol=='3'){?><a href="index.php?p=consulta_articulos" class=" small radius <?php if($informe == "consulta_articulos" || $_GET['p'] == "consulta_articulos"){ ?>green<?php }else{ ?>blue<?php } ?> button">Articulos</a><?php } ?> 
-				<?php  if ($rol=='1' or $rol=='2' or $rol=='3'){?><a href="index.php?p=creacion_venta" class=" small radius <?php if($informe == "creacion_venta" || $_GET['p'] == "creacion_venta"){ ?>green<?php }else{ ?>blue<?php } ?> button">Ventas</a><?php } ?> 
+				<?php  if ($rol=='1' or $rol=='2' or $rol=='3'){?><a href="index.php?p=creacion_venta" class=" small radius <?php if($informe == "creacion_venta" || $_GET['p'] == "creacion_venta"){ ?>green<?php }else{ ?>blue<?php } ?> button">Ventas/Actividades</a><?php } ?> 
 				<?php  if ($rol=='3'){?><a href="index.php?p=consulta_operadores" class=" small radius <?php if($informe == "consulta_operadores" || $_GET['p'] == "consulta_operadores"){ ?>green<?php }else{ ?>blue<?php } ?> button">Operadores</a> <?php } ?> 
 				<?php  if ($rol == '2' or $rol=='3'){?> <a href="index.php?p=reportes" class=" small radius <?php if($informe == "reportes"){ ?>green<?php }else{ ?>blue<?php } ?> button">Reportes</a><?php } ?> 
 				<?php  if ($rol=='1' or $rol=='2' or $rol=='3'){?><a href="index.php?p=salir" class=" small radius <?php if($informe == "salir"){ ?>green<?php }else{ ?>blue<?php } ?> button">Salir</a><?php } ?> 
@@ -139,7 +139,7 @@
 		
 			<!-- Submenú para creacion_venta -->
 		<?php 
-			if($informe == 'creacion_venta' || $informe == 'consulta_ventas')
+			if($informe == 'creacion_venta' || $informe == 'consulta_ventas' || $informe == 'consulta_actividades')
 			{
 		?>
 		<div class="row centered">
@@ -149,8 +149,10 @@
 		</div>
 		<div class="row centered">
 			<div class="twelve columns">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="index.php?p=consulta_ventas" <?php if($_GET['p'] == 'consulta_ventas'){ ?> class="selectedmenu" <?php } ?>>Consulta de Ventas</a> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="index.php?p=consulta_actividades" <?php if($_GET['p'] == 'consulta_actividades'){ ?> class="selectedmenu" <?php } ?>>Consulta de Actividades</a> 
 			</div>
 		</div>
 		<?php
@@ -211,7 +213,7 @@
 		if($informe == 'consulta_contactos' || $informe == 'consulta_articulos' || $informe == 'creacion_venta' || $informe == 'consulta_operadores' || $informe == 'reportes' 
 		         || $informe == 'creacion_articulo' || $informe == 'consulta_venta' || $informe == 'consulta_operadores' || $informe == 'creacion_contacto' || $informe == 'consulta_ventas'
 				|| $informe == 'creacion_operador' || $informe == 'consulta_operador' || $informe == 'salir' || $informe == 'login' || $informe == 'control'|| $informe == 'seguridad'
-				|| $informe == 'ingreso_venta' || $informe == 'ingreso_actividades' 
+				|| $informe == 'ingreso_venta' || $informe == 'ingreso_actividades'  || $informe == 'consulta_actividades' 
 				 )
 			{
 //			include(dirname(__FILE__) .$informe. ".php");
