@@ -28,7 +28,7 @@ if ($action == "edit") {
    
     $sql = "UPDATE operadores SET ";
 	if ($password!= null) {$sql.= "password='".$passwordmd5."',"; 	}
-	$sql.= "rol=".$rol.", nombre=".$nombre.", activo=".$activo."";
+	$sql.= "rol=".$rol.", nombre=".$nombre.", activo=".$activo." ";
     $sql.= "WHERE login=".$login;
 	
     mysql_query($sql, $conexion);
@@ -50,6 +50,15 @@ if ($total == 0) {
 <html>
 <head>
 <title>Perfil Operadores</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+function check(id){
+	if($("#"+id).is(':checked'))
+		$("#"+id).attr('value',1);
+	else
+		$("#"+id).attr('value',0);
+};
+</script>
 </head>
 <body>
 <div align="center"> 
@@ -78,21 +87,13 @@ body .one .bsa_it_p {display:none}
 body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow:#444 1px 1px}
 .add_insert{width:468px;height:60px;float:left;border:0px solid red;margin-left: 492px;margin-top: -42px;}
 </style>
-<script>
-function evento(obj){
-if(obj.checked)
-obj.value='1';
-else
-obj.value='0';
-}
-</script>
 
 
 <h3>Perfil Operador</h3>
 <form method="post" action="editar_operador.php?action=edit" >
 	<input type="hidden" name="p" value ="editar_operador" />
     <strong>Login * :</strong>
-    <input type="text" readonly="readonly"  name="login" value="<?php echo $result['login']; ?>" /> <br>
+    <input type="text" readonly  name="login" value="<?php echo $result['login']; ?>" /> <br>
     <strong>Nombre :</strong>
     <input type="text" name="nombre" value="<?php echo $result['nombre']; ?>" /> <br>
     <strong>Contraseña :</strong>
@@ -105,7 +106,18 @@ obj.value='0';
             </SELECT>
 			
     <strong>Activo : </strong>
-	<input type="text" name="activo" value="<?php echo $result['activo']; ?>" /> <br>
+	<?php $activo = $result['activo']; 
+	if ($activo==0){
+		?>
+        <input id="activochek" class="check" type="checkbox" name="activo" value=0 onClick="check('activochek')" /> <br>
+        <?php
+	}
+	else{
+	?>
+    	<input id="activochek" class="check" type="checkbox" name="activo" checked="checked" value=1 onClick="check('activochek')"/> <br>
+    <?php
+	}
+    ?>
     <button type="submit">Editar Informacion</button>
     <button type="reset">Limpiar</button><br>
 	<h6>Solo los Campos con * no son editables. </h6>

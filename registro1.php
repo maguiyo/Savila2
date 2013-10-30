@@ -1,17 +1,23 @@
 <?php 
 @session_start();
+	//echo "cargo session || ";
 	include("conexion.php");//se incluyen los datos para realizar la conexion a su base de datos
+	//echo "cargo conexion || ";
 	include("autocompleta.php");
+	//echo "autocompleta || ";
 	$TipoRegistro1=$_POST['Registro1'];
+	//echo $TipoRegistro1." = tipo registro ||";
 	$nombre1=$_POST['nombre_c1'];
+	//echo $nombre1." = nombre ||";
 	$id_total=$_POST['id_total'];
+	//echo $id_total."= id total";
 	
 	
 ?>
 <script>
-function consulta_ventas<?php echo $id_total ?>(nombre_c1,TipoRegistro1,TipoRegistro2){
+function consulta_ventas<?php echo $id_total ?>(nombre_c1,TipoRegistro1){
 	$.ajax({
-			data:  {"nombre_c1":nombre_c1, "Registro1":TipoRegistro1, "Registro2":TipoRegistro2,"id_total"	:<?php echo $id_total ?>},
+			data:  {"nombre_c1":nombre_c1, "Registro1":TipoRegistro1, "id_total"	:<?php echo $id_total ?>},
 			url:   'registro1.php',
 			type:  'post',
 			success:  function (response) {$("#divReg<?php echo $id_total ?>").html(response);}
@@ -111,13 +117,13 @@ $(document).ready(function() {
 	
 	if($TipoRegistro1 == '1'){
 ?>
-	<div id="Venta1" >   
+	<div id="Venta<?php echo $id_total ?>" >   
     <p align="center" > Registro de Venta  </p>
 	<strong>Nombre Contacto:</strong>   <input id="tagsC<?php echo $id_total ?>" class="tagsC" name="nombre_c1"  value="<?php echo $nombre_c1 ?>" >
-	<input type="hidden" id="TipoRegistro1" name="TipoRegistro1" value="<?php echo $TipoRegistro1 ?>" />
+	<input type="hidden" id="TipoRegistro1<?php echo $id_total ?>" name="TipoRegistro1" value="<?php echo $TipoRegistro1 ?>" />
 
 	
-    <input id="consulta_venta" name="Buscar" type="submit"  value="Consulta" onclick="consulta_ventas<?php echo $id_total ?>($('#tagsC<?php echo $id_total ?>').val(),$('#TipoRegistro1').val(),$('#TipoRegistro2').val())"/>
+    <input id="consulta_venta<?php echo $id_total ?>" name="Buscar" type="submit"  value="Consulta" onclick="consulta_ventas<?php echo $id_total ?>($('#tagsC<?php echo $id_total ?>').val(),$('#TipoRegistro1<?php echo $id_total ?>').val())"/>
 	
 	
 	<div id="form_venta<?php echo $id_total ?>">
@@ -143,41 +149,44 @@ $(document).ready(function() {
 	</div>
 	</div>
 	
-<?php } ?>
 <?php 
+} 
 	if($TipoRegistro1 == '2'){
 ?>
 	
-	<div id="Actividad1" >   
+	<div id="Actividad<?php echo $id_total ?>" >   
     <p align="center" > Registro de Actividades  </p>
-	<form method="post">
-	<strong>Nombre Contacto: </strong>  <input id="tagsC<?php echo $id_total ?>" class="tagsC" name="nombre_c1" value="<?php echo $nombre_c1 ?>" >
-	<input type="hidden" name="TipoRegistro1" value="<?php echo $TipoRegistro1 ?>" />
+    
+	<strong>Nombre Contacto: </strong>  
+    <input id="tagsC<?php echo $id_total ?>" class="tagsC" name="nombre_c1" value="<?php echo $nombre_c1 ?>" >
+	<input type="hidden" id="TipoRegistro1<?php echo $id_total ?>" name="TipoRegistro1<?php echo $id_total ?>" value="<?php echo $TipoRegistro1 ?>" />
 	
-    <input name="Buscar" type="submit"  value="Consulta" /><br>	
-	</form>
-	<form method="post" action ='index.php?p=ingreso_actividades'>
-	<input type ="hidden"  name="TipoRegistro1" value="<?php echo $TipoRegistro1 ?>" >
-	<input type ="hidden"  name="ConfirmacionBoton1" value="1" >
-	<input type ="hidden"  name="nombre_c1" value="<?php echo $nombre_c1 ?>" >
-	<input type ="hidden"  name="vendedor" value="<?php echo $_SESSION["usuarioactual"] ?>" >
-    <strong>Direcci&oacuten del Contacto:</strong>   <input type = 'text' class="nobord" name='direccion_c1' size='30' border ='0' readonly="readonly" value="<?php echo $direccion1 ?>"/> 
-	<strong>Telefono:</strong>  <input type = 'text' class="nobord" name='telefono_c1' size='30'   readonly="readonly" value="<?php echo $telefono1 ?>"/>  
-	<strong>Celular:</strong> <input type = 'text' class="nobord" name='celular_c1' size='30'   readonly="readonly" value="<?php echo $celular1 ?>"/>  
-	<strong>Tipo Actividad:  </strong> 
-		<SELECT NAME="tipo_actividad1"> 
-            <OPTION SELECTED VALUE=0> Escoga un Tipo Actividad </option>
-            <OPTION VALUE=1> No se pudo contactar con el usuario </option>
-            <OPTION VALUE=2> El usuario contesto pero no estuvo interesado en la compra </option>
-            <OPTION VALUE=3> El usuario contesto y estuvo interesado en la compra </option>
-            <OPTION VALUE=4> Otras razones </option>
-		</SELECT>
-	
-    <strong> Descripcion: </strong>  <textarea id="descripcion" name="descripcion1" rows="5" cols="50"></textarea>
-	<strong> Fecha: </strong> <input type="text" class="datepicker fecha_c1" name="fecha1" value="<?php echo $fecha1 ?>"> 
-    <input name="Registrar" type="submit"  value="Registrar" />
-	</form>
-	</div>
+    <input id="consulta_venta<?php echo $id_total ?>" name="Buscar" type="submit"  value="Consulta" onclick="consulta_ventas<?php echo $id_total ?>($('#tagsC<?php echo $id_total ?>').val(),$('#TipoRegistro1<?php echo $id_total ?>').val())"/>
+    
+    <div id="form_venta<?php echo $id_total ?>">    
+        <input type ="hidden"  name="TipoRegistro1" value="<?php echo $TipoRegistro1 ?>" >
+        <input type ="hidden"  name="nombre_c1" value="<?php echo $nombre_c1 ?>" >
+        <input type ="hidden"  name="vendedor" value="<?php echo $_SESSION["usuarioactual"] ?>" >
+        <strong>Direcci&oacuten del Contacto:</strong>   
+        <input type = 'text' class="nobord" name='direccion_c1' size='30' border ='0' readonly="readonly" value="<?php echo $direccion1 ?>"/> 
+        <strong>Telefono:</strong>  
+        <input type = 'text' class="nobord" name='telefono_c1' size='30'   readonly="readonly" value="<?php echo $telefono1 ?>"/>  
+        <strong>Celular:</strong> 
+        <input type = 'text' class="nobord" name='celular_c1' size='30'   readonly="readonly" value="<?php echo $celular1 ?>"/>  
+        <strong>Tipo Actividad:  </strong> 
+            <SELECT NAME="tipo_actividad1"> 
+                <OPTION SELECTED VALUE=0> Escoga un Tipo Actividad </option>
+                <OPTION VALUE=1> No se pudo contactar con el usuario </option>
+                <OPTION VALUE=2> El usuario contesto pero no estuvo interesado en la compra </option>
+                <OPTION VALUE=3> El usuario contesto y estuvo interesado en la compra </option>
+                <OPTION VALUE=4> Otras razones </option>
+            </SELECT>
+        
+        <strong> Descripcion: </strong>  <textarea id="descripcion" name="descripcion1" rows="5" cols="50"></textarea>
+        <strong> Fecha: </strong> <input type="text" class="datepicker fecha_c1" name="fecha1" value="<?php echo $fecha1 ?>"> 
+        <input id="registrar_venta<?php echo $id_total ?>" name="Registrar" type="submit"  value="Registrar"  onclick="registrar_venta<?php echo $id_total ?>($(this).parent().attr('id'))"/>
+        </div>
+    </div>
 	
 <?php  
 } 

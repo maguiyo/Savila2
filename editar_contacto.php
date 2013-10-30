@@ -16,10 +16,27 @@ if ($action == "edit") {
 	
    
     $sql = "UPDATE contactos SET ";
-    $sql.= "direccion=".$direccion.", telefono=".$telefono.", celular=".$celular.", activo=".$activo."";
-    $sql.= "WHERE nombre=".$nombre;
-    mysql_query($sql, $conexion);
+    $sql.= "direccion=".$direccion.", telefono=".$telefono.", celular=".$celular.", activo=".$activo." ";
+    $sql.= " WHERE nombre=".$nombre;
+    $result=mysql_query($sql, $conexion);
+	$doDebug=true;
+		if(!$result) {
+			if($doDebug) {
+			   // We are debugging so show some nice error output
+			   echo "Query failed\n<br><b>$query</b>\n";
+			   echo mysql_error(); // (Is that not the name)
+			   echo $sql;
+			 }
+			 else {
+			  // Might want an error message to the user here.
+			  ?>
+            	<h5>No se pudo Realizar el Registro</h5>
+            	<?php
+			 }
+			 exit();
+		}
     header("location: index.php?p=consulta_contactos");
+	
 }
  
 $sql = "SELECT * FROM contactos WHERE nombre = ".sqlValue($nombrecontacto, "text");
@@ -43,6 +60,15 @@ if ($total == 0) {
 <html>
 <head>
 <title>Perfil Contactos</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+function check(id){
+	if($("#"+id).is(':checked'))
+		$("#"+id).attr('value',"1");
+	else
+		$("#"+id).attr('value',"0");
+};
+</script>
 </head>
 <body>
 <div align="center"> 
@@ -75,7 +101,7 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
 <h3>Perfil Contacto</h3>
 <form method="post" action="editar_contacto.php?action=edit" >
     <strong>Nombre * :</strong>
-    <input type="text" readonly="readonly"  name="nombre" value="<?php echo $result['nombre']; ?>" /> <br>
+    <input type="text" readonly  name="nombre" value="<?php echo $result['nombre']; ?>" /> <br>
     <strong>Direccion :</strong>
     <input type="text" name="direccion" value="<?php echo $result['direccion']; ?>" /> <br>
     <strong>Telefono :</strong>
@@ -83,9 +109,20 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
     <strong>Celular :</strong>
 	<input type="text" name="celular" value="<?php echo $result['celular']; ?>" /> <br> 
     <strong>Activo : </strong>
-	<input type="text" name="activo" value="<?php echo $result['activo']; ?>" /> <br>
+	<?php $activo = $result['activo']; 
+	if ($activo==0){
+		?>
+        <input id="activochek" class="check" type="checkbox" name="activo" value="0" onClick="check('activochek')" /> <br>
+        <?php
+	}
+	else{
+	?>
+    	<input id="activochek" class="check" type="checkbox" name="activo" checked="checked" value="1" onClick="check('activochek')"/> <br>
+    <?php
+	}
+    ?>
     <strong>Ultima vez contactada * :</strong>
-    <input type="text" readonly="readonly"  name="ultimo_contacto" value="<?php echo $result['ultimo_contacto']; ?>" /> <br>
+    <input type="text" readonly  name="ultimo_contacto" value="<?php echo $result['ultimo_contacto']; ?>" /> <br>
 	<button type="submit">Editar Informacion</button>
     <button type="reset">Limpiar</button><br>
 	<h6>Solo los Campos con * no son editables. </h6>

@@ -33,6 +33,15 @@ if ($total == 0) {
 <html>
 <head>
 <title>Editar Art&iacuteculo </title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+function check(id){
+	if($("#"+id).is(':checked'))
+		$("#"+id).attr('value',"1");
+	else
+		$("#"+id).attr('value',"0");
+};
+</script>
 </head>
 <body>
 <div align="center"> 
@@ -66,15 +75,38 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
 <h3>Editar Art&iacuteculo </h3>
 <form method="post" action="editar_articulo.php?action=edit">
     <strong>Nombre * :</strong>
-    <input type="text" readonly="readonly"  name="nombre" value="<?php echo $result['nombre']; ?>" /> <br>
+    <input type="text" readonly  name="nombre" value="<?php echo $result['nombre']; ?>" /> <br>
     <strong>Precio :</strong>
     <input type="text" name="precio" value="<?php echo $result['precio']; ?>" /> <br>
     <strong>Descripcion :</strong>
     <input type="text" name="descripcion" value="<?php echo $result['descripcion']; ?>" /> <br>
 	<strong>Promocion :</strong>
-    <input type="text" name="promocion" value="<?php echo $result['promocion']; ?>" /> <br>
+    <?php $promo = $result['promocion']; 
+	if ($promo==0){
+		?>
+        <input id="promochek" class="check" type="checkbox" name="promocion" value="0" onClick="check('promochek')"/> <br>
+        <?php
+	}
+	else{
+	?>
+    	<input id="promochek" class="check" type="checkbox" name="promocion" checked="checked" value="1" onClick="check('promochek')"/> <br>
+    <?php
+	}
+    ?>
 	<strong>Activo :</strong>
-    <input type="text" name="activo" value="<?php echo $result['activo']; ?>" /> <br>
+    <?php $activo = $result['activo']; 
+	if ($activo==0){
+		?>
+        <input id="activochek" class="check" type="checkbox" name="activo" value="0" onClick="check('activochek')" /> <br>
+        <?php
+	}
+	else{
+	?>
+    	<input id="activochek" class="check" type="checkbox" name="activo" checked="checked" value="1" onClick="check('activochek')"/> <br>
+    <?php
+	}
+    ?>
+
 	
 	<button type="submit">Guardar</button>
 	<button type="reset">Limpiar</button> <br>
