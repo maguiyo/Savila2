@@ -213,7 +213,8 @@
 		if($informe == 'consulta_contactos' || $informe == 'consulta_articulos' || $informe == 'creacion_venta' || $informe == 'consulta_operadores' || $informe == 'reportes' 
 		         || $informe == 'creacion_articulo' || $informe == 'consulta_venta' || $informe == 'consulta_operadores' || $informe == 'creacion_contacto' || $informe == 'consulta_ventas'
 				|| $informe == 'creacion_operador' || $informe == 'consulta_operador' || $informe == 'salir' || $informe == 'login' || $informe == 'control'|| $informe == 'seguridad'
-				|| $informe == 'ingreso_venta' || $informe == 'ingreso_actividades'  || $informe == 'consulta_actividades' 
+				|| $informe == 'ingreso_venta' || $informe == 'ingreso_actividades'  || $informe == 'consulta_actividades'  
+				|| $informe == 'editar_operador'  || $informe == 'editar_contacto'   || $informe == 'editar_articulo' 
 				 )
 			{
 //			include(dirname(__FILE__) .$informe. ".php");

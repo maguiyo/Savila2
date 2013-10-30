@@ -57,7 +57,14 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
 		<p align="center" >Contraseña : </p>
         <input type = 'password' name='password' size='40'> <br>
 		<p align="center" >Rol : </p>
-        <input type = 'text' name='rol' size='40'> <br>	
+		<SELECT id="rol" NAME="rol" >
+				<OPTION SELECTED VALUE=1> Operador Standard </option>
+                <OPTION VALUE=2> Acceso Reportes </option>  
+				<OPTION VALUE=3> Administrador </option>  
+            </SELECT>
+        
+		
+		
 		<input type = 'submit' value='Crear Operador' align="center" > <br>
 		</form>
 	</body>

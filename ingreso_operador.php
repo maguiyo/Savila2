@@ -12,10 +12,10 @@
 	mysql_connect("$host","$usuario", "$contrasena") or die ("No se puedo realizar la conexion");
 	mysql_select_db("$db_name") or die ("No se puedo escoger la base de datos"); ;
 	
-	
-	
+	$password = $_POST[password];
+	$passwordmd5= md5($password);
 	//$sql="INSERT INTO CONTACTOS (nombre,direccion,telefono) VALUES ('$var1',$var2',$var3')";
-	$sql="INSERT INTO OPERADORES (login,nombre,password,rol,activo) VALUES ('$_POST[login]','$_POST[nombre]','$_POST[password]','$_POST[rol]','1')";
+	$sql="INSERT INTO OPERADORES (login,nombre,password,rol,activo) VALUES ('$_POST[login]','$_POST[nombre]','".$passwordmd5."','$_POST[rol]','1')";
 	
 	?>
 	<link rel="stylesheet" href="styleTable.css">

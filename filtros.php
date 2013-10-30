@@ -1,4 +1,5 @@
 <?php
+	include ("conexion.php");
 	//Retorna un arreglo con los datos del archivo especificado en $nombre_archivo (debe estar ubicado en la carpeta ./datos)
 	function EscribirOpciones($nombre_archivo, $seleccionado='')
 	{
@@ -16,6 +17,10 @@
 		}		
 		echo $opciones;
 	}
+	
+	$query = "SELECT login FROM operadores where login != 'Soporte' like ORDER BY login ASC";
+
+$resultado = mysql_query($query, $conexion);
 
 ?>
 
@@ -62,12 +67,18 @@
 								<td>
 									<select name="operador" style="width:130px;">
 										<option value="all">Operador</option>
-										<?php 
-											if(isset($_GET['operador']) && ($_GET['operador'] <> ''))
-												EscribirOpciones('operadores.txt', $operador); 
-											else
-												EscribirOpciones('operadores.txt'); 
-										?>
+										<?php while( $fila = mysql_fetch_array($resultado) ){
+												$lista[] = $fila;
+										}
+										mysql_free_result( $resultado );
+										if(count($lista)) {
+										foreach($lista as $datos){
+										
+										?> 
+												
+											  	<option value="<?php echo $datos['login']; ?>"><?php echo $datos['login']; ?></option> 
+										<?php }} ?>
+
 									</select>
 								</td>							
 								<td>

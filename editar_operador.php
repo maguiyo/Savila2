@@ -19,13 +19,16 @@ if ($action == "edit") {
 	$login = sqlValue($_POST["login"], "text");
     $nombre = sqlValue($_POST["nombre"], "text");
     $rol = sqlValue($_POST["rol"], "text");
-	$password = sqlValue($_POST["password"], "text");
-	$activo = sqlValue($_POST["activo"], "text");
+	$password = $_POST["password"];
 	$passwordmd5 = md5($password);
 	
+	$activo = sqlValue($_POST["activo"], "text");
+	
+
    
     $sql = "UPDATE operadores SET ";
-    $sql.= "password=".$passwordmd5.", rol=".$rol.", nombre=".$nombre.", activo=".$activo."";
+	if ($password!= null) {$sql.= "password='".$passwordmd5."',"; 	}
+	$sql.= "rol=".$rol.", nombre=".$nombre.", activo=".$activo."";
     $sql.= "WHERE login=".$login;
 	
     mysql_query($sql, $conexion);
@@ -75,17 +78,32 @@ body .one .bsa_it_p {display:none}
 body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow:#444 1px 1px}
 .add_insert{width:468px;height:60px;float:left;border:0px solid red;margin-left: 492px;margin-top: -42px;}
 </style>
+<script>
+function evento(obj){
+if(obj.checked)
+obj.value='1';
+else
+obj.value='0';
+}
+</script>
+
 
 <h3>Perfil Operador</h3>
 <form method="post" action="editar_operador.php?action=edit" >
+	<input type="hidden" name="p" value ="editar_operador" />
     <strong>Login * :</strong>
     <input type="text" readonly="readonly"  name="login" value="<?php echo $result['login']; ?>" /> <br>
     <strong>Nombre :</strong>
     <input type="text" name="nombre" value="<?php echo $result['nombre']; ?>" /> <br>
     <strong>Contraseña :</strong>
-	<input type="password" name="password" value="<?php echo $result['password']; ?>" /> <br>
+	<input type="text" name="password" /><br>
     <strong>Rol :</strong>
-	<input type="text" name="rol" value="<?php echo $result['rol']; ?>" /> <br> 
+			<SELECT id="rol" NAME="rol" >
+				<OPTION <?php if ($result['rol']==1) echo "SELECTED"; ?>  VALUE=1> Operador Standard </option>
+                <OPTION <?php if ($result['rol']==2) echo "SELECTED"; ?>  VALUE=2> Acceso Reportes </option>  
+				<OPTION <?php if ($result['rol']==3) echo "SELECTED"; ?>  VALUE=3> Administrador </option>  
+            </SELECT>
+			
     <strong>Activo : </strong>
 	<input type="text" name="activo" value="<?php echo $result['activo']; ?>" /> <br>
     <button type="submit">Editar Informacion</button>

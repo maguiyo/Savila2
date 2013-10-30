@@ -111,7 +111,7 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
 
 	<br>
 	<br>
-<a href="creacion_ventas_f.php">Ir a Ventas/Actividades</a></td>
+<a href="index.php?p=creacion_venta">Ir a Ventas/Actividades</a></td>
 
 </div> 
 </body>
