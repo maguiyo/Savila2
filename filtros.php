@@ -18,7 +18,7 @@
 		echo $opciones;
 	}
 	
-	$query = "SELECT login FROM operadores where login != 'Soporte' like ORDER BY login ASC";
+	$query = "SELECT login FROM operadores where login != 'Soporte' ORDER BY login ASC;";
 
 $resultado = mysql_query($query, $conexion);
 

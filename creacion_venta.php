@@ -1,3 +1,8 @@
+<?php
+include("conexion.php");//se incluyen los datos para realizar la conexion a su base de datos
+include("autocompleta.php");
+?>
+
 <script>
 var id_combo=3;
 function insertar_combo(){
@@ -25,18 +30,9 @@ function cargar_registro(registro_id, divReg_id, id_total){
                 }
         });
 };
-
-$(document).ready(function(){
-  $("#Registro1").change(function(){
-		
-  });
-});
 </script>
 
-<?php
-include("conexion.php");//se incluyen los datos para realizar la conexion a su base de datos
-include("autocompleta.php");
-	?>
+
 <html>
 	<head>
 		<title>

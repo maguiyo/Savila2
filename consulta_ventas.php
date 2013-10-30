@@ -82,7 +82,7 @@ Buscar Contactos
 	<strong>Operador</strong>
     <input type="text" name="filtro_vendedor" />
     <strong>Fecha</strong>
-    <input type="text"  id="datepicker" readonly="readonly" size="12" name="filtro_fecha"/>
+    <input type="text"  id="datepicker" readonly size="12" name="filtro_fecha"/>
 <button type="submit">Buscar</button>
     <button type="reset">Limpiar</button>
 
@@ -136,7 +136,8 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
     <th class="head"><h3>Direccion</h3></th>
 	<th class="head"><h3>Telefono</h3></th> 
 	<th class="head"><h3>Celular</h3></th> 
-	<th class="head"><h3>Articulo</h3></th>   	
+	<th class="head"><h3>Articulo</h3></th>
+    <th class="head"><h3>Promoción</h3></th>   	
 	<th class="head"><h3>Cantidad</h3></th>
 	<th class="head"><h3>Vendedor</h3></th>
 	<th class="head"><h3>Fecha</h3></th>
@@ -151,6 +152,14 @@ body .one .bsa_it_ad .bsa_it_d {font:12px Arial,Verdana; color:#ccc; text-shadow
 	<td class=""><?php echo $result['telefono_c']; ?></td>
 	<td class=""><?php echo $result['celular_c']; ?></td>
 	<td class=""><?php echo $result['nombre_a']; ?></td>
+	<?php
+         $variable=intval($result['promocion_a']); 
+         if($variable==1){
+    ?>
+	 	<td class=""><img alt="Imagen" src="img/iconcheck.png" /></td>
+	<?php }else{ ?> 
+    	<td class=""><img alt="Imagen" src="img/uncheck.png" /></td>
+    <?php } ?> 
 	<td class=""><?php echo $result['cantidad']; ?></td>
 	<td class=""><?php echo $result['vendedor']; ?></td>
 	<td class=""><?php echo $result['fecha']; ?></td>

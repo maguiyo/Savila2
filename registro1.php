@@ -5,6 +5,8 @@
 	$TipoRegistro1=$_POST['Registro1'];
 	$nombre1=$_POST['nombre_c1'];
 	$id_total=$_POST['id_total'];
+	
+	
 ?>
 <script>
 function consulta_ventas<?php echo $id_total ?>(nombre_c1,TipoRegistro1,TipoRegistro2){
@@ -19,21 +21,38 @@ function consulta_ventas<?php echo $id_total ?>(nombre_c1,TipoRegistro1,TipoRegi
 function registrar_venta<?php echo $id_total ?>(id_form){
 	var dato={};
 	$("#"+id_form+" :input").each(function() {
-		dato[$(this).attr("name")] = $(this).val();
+		if ($(this).attr('type') == 'checkbox'){
+			if ($(this).is(':checked')){
+				dato[$(this).attr("name")] = "1";
+			}
+			else{
+				dato[$(this).attr("name")] = "0";
+			}
+		}
+		else{
+			dato[$(this).attr("name")] = $(this).val();
+		}
+		
     });
-	
 	$.ajax({
 			data:  dato,
 			url:   'ingreso_venta.php',
 			type:  'post',
 			success:  function (response) {$("#divReg<?php echo $id_total ?>").html(response);}
 	});
-	
 	console.log(dato);
-		
 };
-</script>
-<script type="text/javascript">
+
+
+$("#tagsA"+<?php echo $id_total ?>).bind( "autocompletechange", function( event, ui ) {
+	if(parseInt(dicElementos[$("#tagsA"+<?php echo $id_total ?>).val()])){
+		$("#promocionCheck"+<?php echo $id_total ?>).attr("checked","checked")
+	}
+	else{
+		$("#promocionCheck"+<?php echo $id_total ?>).removeAttr("checked")
+	}
+});
+
 jQuery(function($){
 	$.datepicker.regional['es'] = {
 		closeText: 'Cerrar',
@@ -56,15 +75,18 @@ jQuery(function($){
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 });    
 
-        $(document).ready(function() {
-			$(".datepicker").datepicker({
-			showOn: 'both',
-			buttonImage: 'images/calendar.png',
-			buttonImageOnly: true,
-			changeYear: true,
-			numberOfMonths: 2
-		    })
-			});
+$(document).ready(function() {
+	var d = new Date();
+	$(".fecha_c1").val(String(d.getFullYear())+"-"+String(d.getMonth())+"-"+String(d.getDate()))
+	$(".datepicker").datepicker({
+		showOn: 'both',
+		buttonImage: 'images/calendar.png',
+		buttonImageOnly: true,
+		changeYear: true,
+		numberOfMonths: 2,
+		defaultDate: new Date(d.getFullYear(),d.getMonth(),d.getDate())
+	});
+});
     </script>
 
 <?php
@@ -103,12 +125,20 @@ jQuery(function($){
         <input type ="hidden"  name="TipoRegistro1" value="<?php echo $TipoRegistro1 ?>" >
         <input type ="hidden"  name="ConfirmacionBoton1" value="1" >
         <input type ="hidden"  name="vendedor" value="<?php echo $_SESSION["usuarioactual"] ?>" >
-        <strong>Direcci&oacuten del Contacto:</strong>   <input type = 'text' class="nobord" name='direccion_c1' size='30' border ='0' readonly="readonly" value="<?php echo $direccion1 ?>"> 
-        <strong>Telefono:</strong>  <input type = 'text' class="nobord" name='telefono_c1' size='30'   readonly="readonly" value="<?php echo $telefono1 ?>">  
-        <strong>Celular:</strong> <input type = 'text' class="nobord" name='celular_c1' size='30'   readonly="readonly" value="<?php echo $celular1 ?>">  
-        <strong>Art&iacuteculo: </strong>  <input id="tagsA<?php echo $id_total ?>" class="tagsA" name="nombre_a1" value="<?php echo $nombre_a1 ?>"> 
-       <strong> Cantidad: </strong>  <input type = 'text' name='cantidad1' size='10' value="<?php echo $cantidad1 ?>"> 
-        <strong>Fecha : </strong> <input type="text"  class="datepicker" name="fecha1" value="<?php echo $fecha1 ?>"> 
+        <strong>Direcci&oacuten del Contacto:</strong>   
+        <input type = 'text' class="nobord" name='direccion_c1' size='30' border ='0' readonly="readonly" value="<?php echo $direccion1 ?>"> 
+        <strong>Telefono:</strong>  
+        <input type = 'text' class="nobord" name='telefono_c1' size='30'   readonly="readonly" value="<?php echo $telefono1 ?>">  
+        <strong>Celular:</strong> 
+        <input type = 'text' class="nobord" name='celular_c1' size='30'   readonly="readonly" value="<?php echo $celular1 ?>">  
+        <strong>Art&iacuteculo: </strong>  
+        <input id="tagsA<?php echo $id_total ?>" class="tagsA" name="nombre_a1" value="<?php echo $nombre_a1 ?>" > 
+        <strong>Promoción: </strong>
+        <input id="promocionCheck<?php echo $id_total ?>" class="promocionCheck" type="checkbox" name="promocion_a1"  />
+        <strong> Cantidad: </strong>  
+        <input type = 'text' name='cantidad1' size='10' value="<?php echo $cantidad1 ?>"> 
+        <strong>Fecha : </strong> 
+        <input type="text" class="datepicker fecha_c1" name="fecha1" value="<?php echo $fecha1 ?>"> 
         <input id="registrar_venta<?php echo $id_total ?>" name="Registrar" type="submit"  value="Registrar"  onclick="registrar_venta<?php echo $id_total ?>($(this).parent().attr('id'))"/>
 	</div>
 	</div>
@@ -144,7 +174,7 @@ jQuery(function($){
 		</SELECT>
 	
     <strong> Descripcion: </strong>  <textarea id="descripcion" name="descripcion1" rows="5" cols="50"></textarea>
-	<strong> Fecha: </strong> <input type="text" class="datepicker" name="fecha1" value="<?php echo $fecha1 ?>"> 
+	<strong> Fecha: </strong> <input type="text" class="datepicker fecha_c1" name="fecha1" value="<?php echo $fecha1 ?>"> 
     <input name="Registrar" type="submit"  value="Registrar" />
 	</form>
 	</div>

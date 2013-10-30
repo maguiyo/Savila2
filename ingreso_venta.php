@@ -16,6 +16,7 @@
 	$telefono1=$_POST[telefono1];
 	$celular1 =$_POST[celular1];
 	$nombre_a1 =$_POST[nombre_a1];
+	$promocion_a1 = $_POST[promocion_a1];
 	$cantidad1 =$_POST[cantidad1];
 	$fecha1 =$_POST[fecha1];
 	$tipo_actividad1 =$_POST[tipo_actividad1];
@@ -38,8 +39,8 @@
 	
 	//$sql="INSERT INTO CONTACTOS (nombre,direccion,telefono) VALUES ('$var1',$var2',$var3')";
 	if (isset($nombre_c1) and $TipoRegistro1 == 1)
-	{$sql="INSERT INTO venta (nombre_c,direccion_c,telefono_c,celular_c,nombre_a,cantidad,fecha,vendedor) 
-	VALUES ('$_POST[nombre_c1]','$_POST[direccion_c1]','$_POST[telefono_c1]','$_POST[celular_c1]','$_POST[nombre_a1]','$_POST[cantidad1]','$nuevafecha1','$vendedor')";
+	{$sql="INSERT INTO venta (nombre_c,direccion_c,telefono_c,celular_c,nombre_a,promocion_a,cantidad,fecha,vendedor) 
+	VALUES ('$_POST[nombre_c1]','$_POST[direccion_c1]','$_POST[telefono_c1]','$_POST[celular_c1]','$_POST[nombre_a1]','$_POST[promocion_a1]','$_POST[cantidad1]','$nuevafecha1','$vendedor')";
 	
 	$result= mysql_query($sql);
 	

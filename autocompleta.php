@@ -5,21 +5,19 @@
 <?php
 include("conexion.php");//se incluyen los datos para realizar la conexion a su base de datos
 
-$conC = "select * from contactos where activo = 1";//consulta para seleccionar las palabras a buscar, esto va a depender de su base de datos
+$conC = "select nombre from contactos where activo = 1";//consulta para seleccionar las palabras a buscar, esto va a depender de su base de datos
 $queryC = mysql_query($conC);
 
 	?>
     
     <script>
 	$(function() {
-		
 		<?php
 		
 		while($row= mysql_fetch_array($queryC)) {//se reciben los valores y se almacenan en un arreglo
-      $elementosC[]= '"'.$row['nombre'].'"';
-	  
-}
-$arregloC= implode(", ", $elementosC);//junta los valores del array en una sola cadena de texto
+      		$elementosC[]= '"'.$row['nombre'].'"';
+		}
+	$arregloC= implode(", ", $elementosC);//junta los valores del array en una sola cadena de texto
 		?>	
 		
 		var availableTags=new Array(<?php echo $arregloC; ?>);//imprime el arreglo dentro de un array de javascript
@@ -28,71 +26,35 @@ $arregloC= implode(", ", $elementosC);//junta los valores del array en una sola 
 			source: availableTags
 		});
 	});
+	
 	</script>
 
-	<?php
-
-$conA = "select * from articulos where activo = 1";//consulta para seleccionar las palabras a buscar, esto va a depender de su base de datos
-$queryA = mysql_query($conA);
-
-	?>
-    
-    <script>
-	$(function() {
-		
-		<?php
-		
-		while($row= mysql_fetch_array($queryA)) {//se reciben los valores y se almacenan en un arreglo
-      $elementosA[]= '"'.$row['nombre'].'"';
-	  
-}
-$arregloA= implode(", ", $elementosA);//junta los valores del array en una sola cadena de texto
-		?>	
-		
-		var availableTags=new Array(<?php echo $arregloA; ?>);//imprime el arreglo dentro de un array de javascript
-				
-		$( ".tagsA" ).autocomplete({
-			source: availableTags
-		});
-	});
-	</script>
-	
-	
-	
 <?php
 
-$conC2 = "select * from contactos where activo = 1";//consulta para seleccionar las palabras a buscar, esto va a depender de su base de datos
-$queryC2 = mysql_query($conC2);
+	$conA = "select nombre, promocion from articulos where activo = 1";//consulta para seleccionar las palabras a buscar, esto va a depender de su base de datos
+	$queryA = mysql_query($conA);
+	while($row= mysql_fetch_array($queryA)) {//se reciben los valores y se almacenan en un arreglo
+  		$elementosA[]= '"'.$row['nombre'].'"';
+		$dicElementos[$row['nombre']]= $row['promocion'];
+	}
+	$arregloA= implode(", ", $elementosA);//junta los valores del array en una sola cadena de texto
 
-	?>
+?>
+    
+<script>
+var dicElementos = eval(<?php echo json_encode($dicElementos); ?>);
+
+$(function() {	
+	
+	var availableTags=new Array(<?php echo $arregloA; ?>);//imprime el arreglo dentro de un array de javascript
+			
+	$( ".tagsA" ).autocomplete({
+		source: availableTags
+	});
+});
+
+</script>
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
